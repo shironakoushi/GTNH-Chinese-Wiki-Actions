@@ -1,0 +1,31 @@
+name: 每日 Python 脚本
+
+on:
+  schedule:
+    # 每天 UTC 2:00 = 北京时间 10:00
+    - cron: '0 2 * * *'
+  workflow_dispatch:   # 允许在网页上手动点按钮触发
+
+jobs:
+  run-python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 安装依赖
+        run: |
+          pip install -r requirements.txt
+
+      - name: 运行每日脚本
+        env:
+          AUTHKEY: ${{ secrets.WIKI_AUTHKEY }}
+          BOT_USERNAME: ${{ secrets.BOT_USERNAME }}
+          BOT_PASSWORD: ${{ secrets.BOT_PASSWORD }}
+        run: python scripts/daily_task.py
