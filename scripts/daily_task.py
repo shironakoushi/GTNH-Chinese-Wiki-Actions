@@ -80,6 +80,10 @@ def sync_paratranz_stats():
     # 以 Bot 账号登录 wiki
     bot_user = os.environ.get("BOT_USERNAME", "")
     bot_pass = os.environ.get("BOT_PASSWORD", "")
+    authkey_set = bool(os.environ.get("AUTHKEY", ""))
+    print(f"🔍 调试: BOT_USERNAME={'已设置' if bot_user else '空'}, "
+          f"BOT_PASSWORD={'已设置' if bot_pass else '空'}, "
+          f"AUTHKEY={'已设置' if authkey_set else '空'}")
     if bot_user and bot_pass:
         wiki.login(bot_user, bot_pass)
 
