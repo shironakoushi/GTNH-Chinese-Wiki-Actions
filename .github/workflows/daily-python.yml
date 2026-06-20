@@ -2,8 +2,8 @@ name: 每日 Python 脚本
 
 on:
   schedule:
-    # 每5分钟跑一次（测试用）
-    - cron: '*/5 * * * *'
+    # 每天 UTC 2:00 = 北京时间 10:00
+    - cron: '0 2 * * *'
   workflow_dispatch:   # 允许在网页上手动点按钮触发
 
 jobs:
